@@ -1,24 +1,53 @@
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import SignIn from './Components/Registration/SignIn';
+import { createContext, useState } from 'react';
+import NoMatch from './Components/NoMatch/NoMatch';
+import SignUp from './Components/Registration/SignUp';
+import BloodGroup from './Components/BloodGroup/BloodGroup';
+import ContactInfo from './Components/ContactInfo/ContactInfo';
+import ExtraInfo from './Components/ExtraInfo/ExtraInfo';
+import StartJourney from './Components/StartJourney/StartJourney';
+
+export const UserContext = createContext();
 
 function App() {
+  const [signedUser, setSignedUser] = useState({});
+  const [user, setUser] = useState({
+    signedIn: true,
+    name: '',
+    email: '',
+    error: '',
+    success: false,
+  });
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <UserContext.Provider value={{ signedUser, setSignedUser, user, setUser }}>
+      <Router>
+        <Switch>
+          <Route path='/signup'>
+            <SignUp></SignUp>
+          </Route>
+          <Route exact path='/'>
+            <SignIn></SignIn>
+          </Route>
+          <Route path='/group'>
+            <BloodGroup></BloodGroup>
+          </Route>
+          <Route path='/contact'>
+            <ContactInfo></ContactInfo>
+          </Route>
+          <Route path='/extra'>
+            <ExtraInfo></ExtraInfo>
+          </Route>
+          <Route path='/start'>
+            <StartJourney></StartJourney>
+          </Route>
+          <Route path='*'>
+            <NoMatch></NoMatch>
+          </Route>
+        </Switch>
+      </Router>
+    </UserContext.Provider>
   );
 }
 
