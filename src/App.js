@@ -12,6 +12,7 @@ import Home from './Components/Home/Home';
 import Request from './Components/Request/Request';
 import FeedBack from './Components/FeedBack/FeedBack';
 import Profile from './Components/Profile/Profile';
+import PrivateRoute from './Components/PrivateRoute/PrivateRoute';
 
 export const UserContext = createContext();
 
@@ -23,8 +24,6 @@ function App() {
     signedIn: true,
     name: '',
     email: '',
-    error: '',
-    success: false,
   });
   return (
     <UserContext.Provider
@@ -65,9 +64,9 @@ function App() {
           <Route path='/request'>
             <Request></Request>
           </Route>
-          <Route path='/feedback'>
+          <PrivateRoute path='/feedback'>
             <FeedBack></FeedBack>
-          </Route>
+          </PrivateRoute>
           <Route path='/profile'>
             <Profile></Profile>
           </Route>

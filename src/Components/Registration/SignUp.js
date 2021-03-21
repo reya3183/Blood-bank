@@ -52,7 +52,7 @@ const SignUp = () => {
   const classes = useStyles();
   initializeFramework();
 
-  const { user, setUser } = useContext(UserContext);
+  const { user, setUser, setSignedUser } = useContext(UserContext);
   const [createUser, setCreateUser] = useState(true);
   const history = useHistory();
   // const [user, setUser] = useState({
@@ -85,6 +85,7 @@ const SignUp = () => {
       createUserWithEmailAndPassword(user.name, user.email, user.password).then(
         (res) => {
           setUser(res);
+          setSignedUser(res);
           history.push(`/group`);
         }
       );
@@ -146,7 +147,6 @@ const SignUp = () => {
               value='Sign Up'
             ></input>
           </form>
-          <p style={{ color: 'red' }}>{user.error}</p>
         </Grid>
       </Grid>
     </Container>

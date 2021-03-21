@@ -1,6 +1,6 @@
 import { Container, Grid, makeStyles } from '@material-ui/core';
 import { useContext, useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import logo from '../../images/149-1497912_blood-donation-up-donor-darah-logo-png__1_-removebg-preview.png';
 import { UserContext } from '../../App';
 import {
@@ -72,6 +72,8 @@ const useStyles = makeStyles({
 const SignIn = () => {
   const classes = useStyles();
   const history = useHistory();
+  const location = useLocation();
+  const { from } = location.state || { from: { pathname: '/' } };
   // const [user, setUser] = useState({
   //   signedIn: true,
   //   name: '',
@@ -82,7 +84,7 @@ const SignIn = () => {
   // });
 
   initializeFramework();
-  const { user, setUser } = useContext(UserContext);
+  const { user, setUser, setSignedUser } = useContext(UserContext);
 
   const handleBlur = (e) => {
     let fieldValid = true;
@@ -106,8 +108,9 @@ const SignIn = () => {
     if (user.email && user.password) {
       signInWithEmailAndPassword(user.email, user.password).then((res) => {
         setUser(res);
+        setSignedUser(res);
         console.log(user);
-        history.push(`/home`);
+        history.replace(from);
       });
     }
     e.target.reset();
@@ -167,10 +170,6 @@ const SignIn = () => {
               SignUp
             </Link>
           </p>
-          <p style={{ color: 'red' }}>{user.error}</p>
-          {user.success && (
-            <p style={{ color: 'green' }}>logged successfully</p>
-          )}
         </Grid>
       </Grid>
     </Container>

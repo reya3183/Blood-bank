@@ -1,3 +1,4 @@
+import { handleSignOut } from '../Registration/registerManager';
 import Sidebar from '../Sidebar/Sidebar';
 
 const Home = () => {

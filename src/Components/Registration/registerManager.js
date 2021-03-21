@@ -15,9 +15,8 @@ export const handleSignOut = () => {
     .then((res) => {
       const signedOutUser = {
         signedIn: false,
-        name: '',
-        email: '',
       };
+      console.log('success');
       return signedOutUser;
     })
     .catch((error) => {
@@ -74,12 +73,6 @@ export const resetPassword = (email) => {
       console.log(error);
     });
 };
-
-export function writeUserData(type) {
-  return firebase.database().ref('type').set({
-    religion: type,
-  });
-}
 
 // const updateUserName = (name) => {
 //   const user = firebase.auth.currentUser;
