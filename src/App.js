@@ -10,12 +10,15 @@ import ExtraInfo from './Components/ExtraInfo/ExtraInfo';
 import StartJourney from './Components/StartJourney/StartJourney';
 import Home from './Components/Home/Home';
 import Request from './Components/Request/Request';
+import FeedBack from './Components/FeedBack/FeedBack';
+import Profile from './Components/Profile/Profile';
 
 export const UserContext = createContext();
 
 function App() {
   const [signedUser, setSignedUser] = useState({});
   const [request, setRequest] = useState({});
+  const [profileData, setProfileData] = useState({});
   const [user, setUser] = useState({
     signedIn: true,
     name: '',
@@ -25,7 +28,16 @@ function App() {
   });
   return (
     <UserContext.Provider
-      value={{ signedUser, setSignedUser, user, setUser, request, setRequest }}
+      value={{
+        signedUser,
+        setSignedUser,
+        user,
+        setUser,
+        request,
+        setRequest,
+        profileData,
+        setProfileData,
+      }}
     >
       <Router>
         <Switch>
@@ -52,6 +64,12 @@ function App() {
           </Route>
           <Route path='/request'>
             <Request></Request>
+          </Route>
+          <Route path='/feedback'>
+            <FeedBack></FeedBack>
+          </Route>
+          <Route path='/profile'>
+            <Profile></Profile>
           </Route>
           <Route path='*'>
             <NoMatch></NoMatch>

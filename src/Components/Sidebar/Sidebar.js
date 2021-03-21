@@ -20,7 +20,7 @@ const useStyles = makeStyles({
     boxShadow: 'none',
     fontSize: '.875rem',
     margin: '.5rem 0rem',
-    '&:hover,&:focus': {
+    '&:hover,&:focus,&:active,&:visited': {
       backgroundColor: 'transparent',
       color: '#D32026',
       boxShadow: 'none',
@@ -46,7 +46,7 @@ const Sidebar = () => {
         </Button>
       </Link>
       <br />
-      <Link to='/'>
+      <Link to='/profile'>
         <Button className={classes.btnStyle} variant='contained'>
           <PersonIcon className={classes.iconStyle} />
           Profile
@@ -60,7 +60,7 @@ const Sidebar = () => {
         </Button>
       </Link>
       <br />
-      <Link to='/'>
+      <Link to='/feedback'>
         <Button className={classes.btnStyle} variant='contained'>
           <FeedbackIcon className={classes.iconStyle} />
           Feedback

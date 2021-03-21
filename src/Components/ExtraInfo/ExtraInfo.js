@@ -51,6 +51,7 @@ const useStyles = makeStyles({
     color: 'white',
     fontSize: '.875rem',
     margin: '2rem 0rem',
+    cursor: 'pointer',
   },
   textStyle: {
     marginTop: '3rem',

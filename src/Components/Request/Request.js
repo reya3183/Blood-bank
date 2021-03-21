@@ -6,7 +6,7 @@ const useStyles = makeStyles({
   root: {
     maxWidth: '32rem',
     height: '30rem',
-    margin: '20px',
+    margin: '2rem',
   },
   paperRoot: {
     display: 'flex',
@@ -17,6 +17,7 @@ const useStyles = makeStyles({
     fontFamily: 'Lato, sans-serif',
     fontSize: '1.8rem',
     textAlign: 'center',
+    marginBottom: '1.5rem',
   },
   formStyle: {
     display: 'flex',
@@ -76,6 +77,25 @@ const useStyles = makeStyles({
     justifyContent: 'space-between',
     marginBottom: '1rem',
   },
+  requestType: {
+    color: '#D32026',
+    fontWeight: 'bold',
+  },
+  reqTimeStyle: {
+    color: '#4A4A4A',
+    fontSize: '.785rem',
+  },
+  stage: {
+    padding: '5px',
+    border: 'none',
+    borderRadius: '25px',
+    color: 'white',
+    cursor: 'pointer',
+  },
+  group: {
+    color: 'black',
+    fontWeight: 'bold',
+  },
 });
 
 const Request = () => {
@@ -100,167 +120,177 @@ const Request = () => {
     setRequest(newRequest);
   };
   const handleSubmit = (e) => {
+    console.log(request);
     e.preventDefault();
     e.target.reset();
   };
   return (
-    <div className={classes.gridRoot}>
-      <Container>
-        <Grid container spacing={2}>
-          <Grid item xs={3}>
-            <Sidebar></Sidebar>
-          </Grid>
-          <Grid
-            style={{
-              display: 'flex',
-              marginTop: '3rem',
-              justifyContent: 'space-between',
-            }}
-            item
-            xs={9}
-          >
-            <Card className={classes.root}>
-              <h3 className={classes.headline}>Request Form</h3>
-              <form className={classes.formStyle} onSubmit={handleSubmit}>
-                <label className={classes.labelStyle}>
-                  Relationship with Patient
-                  <br />
-                  <input
-                    type='text'
-                    name='relation'
-                    onBlur={handleBlur}
-                    className={classes.relStyle}
-                    required
-                  />
-                </label>
-                <label className={classes.labelStyle}>
-                  Blood Group
-                  <br />
-                  <input
-                    type='text'
-                    name='bloodGroup'
-                    onBlur={handleBlur}
-                    className={classes.groupStyle}
-                    required
-                  />
-                </label>
-                <label className={classes.labelStyle}>
-                  Alternate number
-                  <br />
-                  <input
-                    type='text'
-                    name='alternate'
-                    onBlur={handleBlur}
-                    className={classes.groupStyle}
-                    required
-                  />
-                </label>
-                <label className={classes.labelStyle}>
-                  Union
-                  <br />
-                  <input
-                    type='text'
-                    name='union'
-                    onBlur={handleBlur}
-                    className={classes.groupStyle}
-                    required
-                  />
-                </label>
-                <label className={classes.labelStyle}>
-                  Post Office
-                  <br />
-                  <input
-                    type='text'
-                    name='post'
-                    onBlur={handleBlur}
-                    className={classes.groupStyle}
-                    required
-                  />
-                </label>
-                <label className={classes.labelStyle}>
-                  Police Station
-                  <br />
-                  <input
-                    type='text'
-                    name='station'
-                    onBlur={handleBlur}
-                    className={classes.groupStyle}
-                    required
-                  />
-                </label>
-                <label className={classes.labelStyle}>
-                  District
-                  <br />
-                  <input
-                    type='text'
-                    name='district'
-                    onBlur={handleBlur}
-                    className={classes.groupStyle}
-                    required
-                  />
-                </label>
-                <label className={classes.labelStyle}>
-                  Time
-                  <br />
-                  <input
-                    type='time'
-                    name='requestTime'
-                    onChange={handleChange}
-                    className={classes.DTStyle}
-                    required
-                  />
-                </label>
-                <label className={classes.labelStyle}>
-                  Date
-                  <br />
-                  <input
-                    type='date'
-                    name='requestDate'
-                    onChange={handleChange}
-                    className={classes.DTStyle}
-                    min='1960-01-01'
-                    max='2022-12-31'
-                    required
-                  />
-                </label>
+    <Container style={{ marginTop: '3rem' }}>
+      <Grid container spacing={2}>
+        <Grid item xs={3}>
+          <Sidebar></Sidebar>
+        </Grid>
+        <Grid
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+          }}
+          item
+          xs={9}
+        >
+          <Card className={classes.root}>
+            <h3 className={classes.headline}>Request Form</h3>
+            <form className={classes.formStyle} onSubmit={handleSubmit}>
+              <label className={classes.labelStyle}>
+                Relationship with Patient
                 <br />
                 <input
-                  className={classes.publishStyle}
-                  type='submit'
-                  value='Publish'
-                ></input>
-              </form>
-            </Card>
+                  type='text'
+                  name='relation'
+                  onBlur={handleBlur}
+                  className={classes.relStyle}
+                  required
+                />
+              </label>
+              <label className={classes.labelStyle}>
+                Blood Group
+                <br />
+                <input
+                  type='text'
+                  name='bloodGroup'
+                  onBlur={handleBlur}
+                  className={classes.groupStyle}
+                  required
+                />
+              </label>
+              <label className={classes.labelStyle}>
+                Alternate number
+                <br />
+                <input
+                  type='text'
+                  name='alternate'
+                  onBlur={handleBlur}
+                  className={classes.groupStyle}
+                  required
+                />
+              </label>
+              <label className={classes.labelStyle}>
+                Union
+                <br />
+                <input
+                  type='text'
+                  name='union'
+                  onBlur={handleBlur}
+                  className={classes.groupStyle}
+                  required
+                />
+              </label>
+              <label className={classes.labelStyle}>
+                Post Office
+                <br />
+                <input
+                  type='text'
+                  name='post'
+                  onBlur={handleBlur}
+                  className={classes.groupStyle}
+                  required
+                />
+              </label>
+              <label className={classes.labelStyle}>
+                Police Station
+                <br />
+                <input
+                  type='text'
+                  name='station'
+                  onBlur={handleBlur}
+                  className={classes.groupStyle}
+                  required
+                />
+              </label>
+              <label className={classes.labelStyle}>
+                District
+                <br />
+                <input
+                  type='text'
+                  name='district'
+                  onBlur={handleBlur}
+                  className={classes.groupStyle}
+                  required
+                />
+              </label>
+              <label className={classes.labelStyle}>
+                Time
+                <br />
+                <input
+                  type='time'
+                  name='requestTime'
+                  onChange={handleChange}
+                  className={classes.DTStyle}
+                  required
+                />
+              </label>
+              <label className={classes.labelStyle}>
+                Date
+                <br />
+                <input
+                  type='date'
+                  name='requestDate'
+                  onChange={handleChange}
+                  className={classes.DTStyle}
+                  min='1960-01-01'
+                  max='2022-12-31'
+                  required
+                />
+              </label>
+              <br />
+              <input
+                className={classes.publishStyle}
+                type='submit'
+                value='Publish'
+              ></input>
+            </form>
+          </Card>
 
-            <div className={classes.paperRoot}>
-              <h3 className={classes.headline}>Blood Requests</h3>
-              {requestData.map((item) => (
-                <Paper
-                  key={item.id}
-                  className={classes.paperStyle}
-                  elevation={3}
-                >
-                  <div className={classes.paperText}>
-                    <p>{item.requestType}</p>
-                    <p>{item.Address}</p>
-                    <span>{item.date}</span>
-                    <span>{item.time}</span>
-                  </div>
-                  <div>
-                    <button>{item.stage}</button>
-                    <p>
-                      {item.group}
-                      <span>{item.amount}</span>
-                    </p>
-                    <span>{item.relation}</span>
-                  </div>
-                </Paper>
-              ))}
-            </div>
-          </Grid>
+          <div className={classes.paperRoot}>
+            <h3 className={classes.headline}>Blood Requests</h3>
+            {requestData.map((item) => (
+              <Paper key={item.id} className={classes.paperStyle} elevation={3}>
+                <div className={classes.paperText}>
+                  <p className={classes.requestType}>{item.requestType}</p>
+                  <p>{item.Address}</p>
+                  <p className={classes.reqTimeStyle}>
+                    <span>{item.date} </span>
+                    <span> {item.time}</span>
+                  </p>
+                </div>
+                <div>
+                  {item.stage === 'managed' ? (
+                    <button
+                      style={{ backgroundColor: '#00C764' }}
+                      className={classes.stage}
+                    >
+                      {item.stage}
+                    </button>
+                  ) : (
+                    <button
+                      style={{ backgroundColor: '#D32026' }}
+                      className={classes.stage}
+                    >
+                      {item.stage}
+                    </button>
+                  )}
+                  <p>
+                    <span className={classes.group}>{item.group}</span>
+                    <span> {item.amount}</span>
+                  </p>
+                  <span>{item.relation}</span>
+                </div>
+              </Paper>
+            ))}
+          </div>
         </Grid>
-      </Container>
-    </div>
+      </Grid>
+    </Container>
   );
 };
 
