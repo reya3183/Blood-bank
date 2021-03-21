@@ -7,7 +7,7 @@ const useStyles = makeStyles({
   image: {
     height: 'auto',
     maxWidth: '150px',
-    marginTop: '3rem',
+    marginTop: '7rem',
   },
   red: {
     color: '#D32026',
@@ -32,9 +32,10 @@ const useStyles = makeStyles({
     },
   },
   nextStyle: {
+    cursor: 'pointer',
     textAlign: 'center',
     padding: '15px 110px',
-    borderRadius: '15px',
+    borderRadius: '25px',
     border: 'none',
     backgroundColor: '#D32026',
     color: 'white',
@@ -43,7 +44,7 @@ const useStyles = makeStyles({
   },
   textStyle: {
     marginTop: '3rem',
-    fontSize: '1.8rem',
+    fontSize: '1.5rem',
     fontFamily: 'Montserrat, sans-serif',
     color: '#6F6F6F',
   },
@@ -60,6 +61,7 @@ const ContactInfo = () => {
     setUser(newUser);
   };
   const handleSubmit = (e) => {
+    e.target.reset();
     e.preventDefault();
     console.log(user);
     history.push(`/extra`);

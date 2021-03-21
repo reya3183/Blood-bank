@@ -5,6 +5,7 @@ import logo from '../../images/149-1497912_blood-donation-up-donor-darah-logo-pn
 import {
   createUserWithEmailAndPassword,
   initializeFramework,
+  writeUserData,
 } from './registerManager';
 import { useHistory } from 'react-router';
 
@@ -19,13 +20,16 @@ const useStyles = makeStyles({
   },
   headline: {
     color: '#0E0E0E',
+    fontFamily: 'Lato, sans-serif',
+    fontSize: '2rem',
+    marginTop: '7rem',
   },
   labelStyle: {
     display: 'block',
     marginTop: '15px',
   },
   inputStyle: {
-    padding: '15px 40px',
+    padding: '15px 60px',
     borderRadius: '15px',
     border: 'none',
     backgroundColor: '#EDF0F5',
@@ -33,15 +37,15 @@ const useStyles = makeStyles({
       outline: 'none',
     },
   },
-  loginStyle: {
+  signUpStyle: {
     textAlign: 'center',
-    padding: '15px 110px',
-    borderRadius: '15px',
+    padding: '15px 125px',
+    borderRadius: '25px',
     border: 'none',
     backgroundColor: '#D32026',
     color: 'white',
     fontSize: '.875rem',
-    marginBottom: '20px',
+    margin: '20px 0px',
   },
 });
 const SignUp = () => {
@@ -85,6 +89,7 @@ const SignUp = () => {
         }
       );
     }
+    e.target.reset();
     e.preventDefault();
   };
 
@@ -133,11 +138,12 @@ const SignUp = () => {
                 required
               />
             </label>
+            <span> * contain at least one number digit </span>
             <br />
             <input
-              className={classes.loginStyle}
+              className={classes.signUpStyle}
               type='submit'
-              value='Login'
+              value='Sign Up'
             ></input>
           </form>
           <p style={{ color: 'red' }}>{user.error}</p>

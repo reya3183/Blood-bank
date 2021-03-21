@@ -1,10 +1,11 @@
 import { Container, Grid, makeStyles } from '@material-ui/core';
 import { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import logo from '../../images/149-1497912_blood-donation-up-donor-darah-logo-png__1_-removebg-preview.png';
 import { UserContext } from '../../App';
 import {
   initializeFramework,
+  resetPassword,
   signInWithEmailAndPassword,
 } from './registerManager';
 
@@ -13,7 +14,6 @@ const useStyles = makeStyles({
     height: 'auto',
     maxWidth: '300px',
     marginTop: '8rem',
-    marginBottom: '5rem',
   },
   red: {
     color: '#D32026',
@@ -21,10 +21,16 @@ const useStyles = makeStyles({
   headline: {
     marginTop: '7rem',
     color: '#0E0E0E',
+    fontFamily: 'Lato, sans-serif',
+    fontWeight: '900',
   },
   labelStyle: {
     display: 'block',
     marginTop: '15px',
+  },
+  logoStyle: {
+    fontFamily: 'Lato, sans-serif',
+    fontWeight: '900',
   },
   inputStyle: {
     padding: '15px 40px',
@@ -38,7 +44,7 @@ const useStyles = makeStyles({
   loginStyle: {
     textAlign: 'center',
     padding: '15px 110px',
-    borderRadius: '15px',
+    borderRadius: '25px',
     border: 'none',
     backgroundColor: '#D32026',
     color: 'white',
@@ -50,9 +56,22 @@ const useStyles = makeStyles({
     textDecoration: 'none',
     color: '#0E0E0E',
   },
+  forgetBtn: {
+    backgroundColor: 'Transparent',
+    border: 'none',
+    overflow: 'hidden',
+    outline: 'none',
+    cursor: 'pointer',
+    color: '#6F6F6F',
+    fontSize: '.875rem',
+    '&:hover': {
+      color: '#D32026',
+    },
+  },
 });
 const SignIn = () => {
   const classes = useStyles();
+  const history = useHistory();
   // const [user, setUser] = useState({
   //   signedIn: true,
   //   name: '',
@@ -87,8 +106,11 @@ const SignIn = () => {
     if (user.email && user.password) {
       signInWithEmailAndPassword(user.email, user.password).then((res) => {
         setUser(res);
+        console.log(user);
+        history.push(`/home`);
       });
     }
+    e.target.reset();
     e.preventDefault();
   };
 
@@ -97,8 +119,8 @@ const SignIn = () => {
       <Grid container direction='row' justify='center' alignItems='center'>
         <Grid item xs={12} sm={6} md={6}>
           <img src={logo} alt='logo' className={classes.image} />
-          <h1>
-            <span className={classes.red}>Blood</span> Donation
+          <h1 className={classes.logoStyle}>
+            <span className={classes.red}>Blood </span> Donation
           </h1>
         </Grid>
         <Grid style={{ color: '#6F6F6F' }} item xs={12} sm={6} md={6}>
@@ -133,7 +155,12 @@ const SignIn = () => {
               value='Login'
             ></input>
           </form>
-          <p>Forget Password?</p>
+          <button
+            className={classes.forgetBtn}
+            onClick={() => resetPassword(user.email)}
+          >
+            Forget Password
+          </button>
           <p>
             Don't have an account?
             <Link to='/signup' className={classes.linkStyle}>

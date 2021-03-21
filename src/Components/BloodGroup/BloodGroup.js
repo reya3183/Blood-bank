@@ -8,7 +8,7 @@ const useStyles = makeStyles({
   image: {
     height: 'auto',
     maxWidth: '150px',
-    marginTop: '3rem',
+    marginTop: '7rem',
   },
   red: {
     color: '#D32026',
@@ -21,7 +21,7 @@ const useStyles = makeStyles({
   },
   textStyle: {
     marginTop: '3rem',
-    fontSize: '1.8rem',
+    fontSize: '1.5rem',
     fontFamily: 'Montserrat, sans-serif',
     color: '#6F6F6F',
   },
@@ -36,12 +36,12 @@ const useStyles = makeStyles({
     border: '3px solid #D32026',
     borderRadius: '50%',
     margin: '10px',
-    padding: '9px',
+    padding: '15px 0px',
   },
   nextStyle: {
     textAlign: 'center',
     padding: '15px 110px',
-    borderRadius: '15px',
+    borderRadius: '25px',
     border: 'none',
     backgroundColor: '#D32026',
     color: 'white',
@@ -64,6 +64,7 @@ const BloodGroup = () => {
     setUser(newUser);
   };
   const handleSubmit = (e) => {
+    e.target.reset();
     e.preventDefault();
     console.log(user);
     history.push(`/contact`);
@@ -78,8 +79,9 @@ const BloodGroup = () => {
             <span className={classes.red}>Blood</span> Donation
           </h1>
           <p className={classes.textStyle}>
-            Your blood group need to be accurate! If you don't know about it,
-            please contact nearest clinic.
+            Your blood group need to be{' '}
+            <span className={classes.red}>accurate</span>! If you don't know
+            about it, please contact nearest clinic.
           </p>
         </Grid>
         <Grid item xs={12} sm={6} md={6}>

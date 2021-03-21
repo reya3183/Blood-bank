@@ -8,11 +8,14 @@ import BloodGroup from './Components/BloodGroup/BloodGroup';
 import ContactInfo from './Components/ContactInfo/ContactInfo';
 import ExtraInfo from './Components/ExtraInfo/ExtraInfo';
 import StartJourney from './Components/StartJourney/StartJourney';
+import Home from './Components/Home/Home';
+import Request from './Components/Request/Request';
 
 export const UserContext = createContext();
 
 function App() {
   const [signedUser, setSignedUser] = useState({});
+  const [request, setRequest] = useState({});
   const [user, setUser] = useState({
     signedIn: true,
     name: '',
@@ -21,7 +24,9 @@ function App() {
     success: false,
   });
   return (
-    <UserContext.Provider value={{ signedUser, setSignedUser, user, setUser }}>
+    <UserContext.Provider
+      value={{ signedUser, setSignedUser, user, setUser, request, setRequest }}
+    >
       <Router>
         <Switch>
           <Route path='/signup'>
@@ -41,6 +46,12 @@ function App() {
           </Route>
           <Route path='/start'>
             <StartJourney></StartJourney>
+          </Route>
+          <Route path='/home'>
+            <Home></Home>
+          </Route>
+          <Route path='/request'>
+            <Request></Request>
           </Route>
           <Route path='*'>
             <NoMatch></NoMatch>

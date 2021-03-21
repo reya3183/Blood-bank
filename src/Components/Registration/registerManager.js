@@ -62,16 +62,35 @@ export const signInWithEmailAndPassword = (email, password) => {
     });
 };
 
-const updateUserName = (name) => {
-  const user = firebase.auth.currentUser;
-  user
-    .updateProfile({
-      displayName: name,
-    })
+export const resetPassword = (email) => {
+  var auth = firebase.auth();
+
+  auth
+    .sendPasswordResetEmail(email)
     .then(function () {
-      console.log('user name updated successfully');
+      // email sent
     })
     .catch(function (error) {
       console.log(error);
     });
 };
+
+export function writeUserData(type) {
+  return firebase.database().ref('type').set({
+    religion: type,
+  });
+}
+
+// const updateUserName = (name) => {
+//   const user = firebase.auth.currentUser;
+//   user
+//     .updateProfile({
+//       displayName: name,
+//     })
+//     .then(function () {
+//       console.log('user name updated successfully');
+//     })
+//     .catch(function (error) {
+//       console.log(error);
+//     });
+// };

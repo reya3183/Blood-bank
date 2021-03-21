@@ -3,6 +3,7 @@ import React, { useContext } from 'react';
 import { useHistory } from 'react-router';
 import { UserContext } from '../../App';
 import logo from '../../images/149-1497912_blood-donation-up-donor-darah-logo-png__1_-removebg-preview.png';
+import { writeUserData } from '../Registration/registerManager';
 const useStyles = makeStyles({
   image: {
     height: 'auto',
@@ -32,10 +33,19 @@ const useStyles = makeStyles({
       outline: 'none',
     },
   },
+  dateStyle: {
+    padding: '13px 70px',
+    borderRadius: '15px',
+    border: 'none',
+    backgroundColor: '#EDF0F5',
+    '&:focus': {
+      outline: 'none',
+    },
+  },
   nextStyle: {
     textAlign: 'center',
     padding: '15px 110px',
-    borderRadius: '15px',
+    borderRadius: '25px',
     border: 'none',
     backgroundColor: '#D32026',
     color: 'white',
@@ -44,7 +54,7 @@ const useStyles = makeStyles({
   },
   textStyle: {
     marginTop: '3rem',
-    fontSize: '1.8rem',
+    fontSize: '1.7rem',
     fontFamily: 'Montserrat, sans-serif',
     color: '#6F6F6F',
   },
@@ -66,8 +76,9 @@ const ExtraInfo = () => {
     setUser(newUser);
   };
   const handleSubmit = (e) => {
-    e.preventDefault();
     console.log(user);
+    e.target.reset();
+    e.preventDefault();
     history.push(`/start`);
   };
   return (
@@ -82,12 +93,12 @@ const ExtraInfo = () => {
             Please provide your <span className={classes.red}>accurate</span>{' '}
             weight and Birth-date{' '}
           </p>
-          <p style={{ fontSize: '1.6rem' }} className={classes.textStyle}>
+          <p style={{ fontSize: '1.3rem' }} className={classes.textStyle}>
             Minimum weight for donation:{' '}
             <span className={classes.red}>50kg</span>
           </p>
           <p
-            style={{ marginTop: '0rem', fontSize: '1.6rem' }}
+            style={{ marginTop: '0rem', fontSize: '1.3rem' }}
             className={classes.textStyle}
           >
             Minimum age for donation: <span className={classes.red}>18yrs</span>
@@ -125,7 +136,7 @@ const ExtraInfo = () => {
                 type='date'
                 name='birthdate'
                 onChange={handleChange}
-                className={classes.inputStyle}
+                className={classes.dateStyle}
                 min='1960-01-01'
                 max='2022-12-31'
                 required

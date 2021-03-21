@@ -12,9 +12,10 @@ const useStyles = makeStyles({
     color: '#D32026',
   },
   nextStyle: {
+    cursor: 'pointer',
     textAlign: 'center',
     padding: '15px 110px',
-    borderRadius: '15px',
+    borderRadius: '25px',
     border: 'none',
     backgroundColor: '#D32026',
     color: 'white',
