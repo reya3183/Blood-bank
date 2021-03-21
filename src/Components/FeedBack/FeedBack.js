@@ -48,42 +48,51 @@ const FeedBack = () => {
     e.target.reset();
   };
   return (
-    <Container style={{ marginTop: '3rem' }}>
-      <Grid container spacing={2}>
-        <Grid item xs={3}>
-          <Sidebar></Sidebar>
-        </Grid>
-        <Grid
-          style={{
-            display: 'flex',
-            marginTop: '3rem',
-            justifyContent: 'space-between',
-          }}
-          item
-          xs={9}
-        >
-          <form onSubmit={handleSubmit}>
-            <h3 className={classes.headline}>Give Your Valuable Reviews!</h3>
-            <Card>
-              <textarea
-                name='feedback'
-                cols='30'
-                rows='5'
-                onBlur={handleBlur}
-                className={classes.textAreaStyle}
-                required
+    <div style={{ backgroundColor: '#F6F7F9' }}>
+      <Container>
+        <Grid container spacing={2}>
+          <Grid
+            item
+            xs={3}
+            style={{
+              backgroundColor: 'white',
+              textAlign: 'center',
+              paddingTop: '3rem',
+            }}
+          >
+            <Sidebar></Sidebar>
+          </Grid>
+          <Grid
+            style={{
+              marginTop: '3rem',
+              padding: '3rem',
+            }}
+            item
+            xs={9}
+          >
+            <form style={{ width: '25rem' }} onSubmit={handleSubmit}>
+              <h3 className={classes.headline}>Give Your Valuable Reviews!</h3>
+              <Card>
+                <textarea
+                  name='feedback'
+                  cols='30'
+                  rows='5'
+                  onBlur={handleBlur}
+                  className={classes.textAreaStyle}
+                  required
+                />
+              </Card>
+              <br />
+              <input
+                type='submit'
+                value='Publish'
+                className={classes.publishStyle}
               />
-            </Card>
-            <br />
-            <input
-              type='submit'
-              value='Publish'
-              className={classes.publishStyle}
-            />
-          </form>
+            </form>
+          </Grid>
         </Grid>
-      </Grid>
-    </Container>
+      </Container>
+    </div>
   );
 };
 
