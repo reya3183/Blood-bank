@@ -86,10 +86,16 @@ const SignUp = () => {
         (res) => {
           setUser(res);
           setSignedUser(res);
-          history.push(`/group`);
+          if (user.success) {
+            history.push(`/group`);
+          }
         }
       );
     }
+    // if (user.success) {
+    //   history.push(`/group`);
+    // }
+
     e.target.reset();
     e.preventDefault();
   };
@@ -147,6 +153,7 @@ const SignUp = () => {
               value='Sign Up'
             ></input>
           </form>
+          <p>{user.error}</p>
         </Grid>
       </Grid>
     </Container>

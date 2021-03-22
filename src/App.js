@@ -13,11 +13,13 @@ import Request from './Components/Request/Request';
 import FeedBack from './Components/FeedBack/FeedBack';
 import Profile from './Components/Profile/Profile';
 import PrivateRoute from './Components/PrivateRoute/PrivateRoute';
+import Update from './Components/Update/Update';
 
 export const UserContext = createContext();
 
 function App() {
   const [signedUser, setSignedUser] = useState({});
+  const [donors, setDonors] = useState({});
   const [request, setRequest] = useState({});
   const [profileData, setProfileData] = useState({});
   const [user, setUser] = useState({
@@ -36,6 +38,8 @@ function App() {
         setRequest,
         profileData,
         setProfileData,
+        donors,
+        setDonors,
       }}
     >
       <Router>
@@ -58,17 +62,23 @@ function App() {
           <Route path='/start'>
             <StartJourney></StartJourney>
           </Route>
+          {/* <PrivateRoute path='/home'>
+            <Home></Home>
+          </PrivateRoute> */}
           <Route path='/home'>
             <Home></Home>
           </Route>
           <Route path='/request'>
             <Request></Request>
           </Route>
-          <PrivateRoute path='/feedback'>
+          <Route path='/feedback'>
             <FeedBack></FeedBack>
-          </PrivateRoute>
+          </Route>
           <Route path='/profile'>
             <Profile></Profile>
+          </Route>
+          <Route path='/update'>
+            <Update></Update>
           </Route>
           <Route path='*'>
             <NoMatch></NoMatch>

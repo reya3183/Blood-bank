@@ -1,4 +1,11 @@
-import { Card, Container, Grid, makeStyles, Paper } from '@material-ui/core';
+import {
+  Card,
+  CircularProgress,
+  Container,
+  Grid,
+  makeStyles,
+  Paper,
+} from '@material-ui/core';
 import { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../../App';
 import Sidebar from '../Sidebar/Sidebar';
@@ -12,12 +19,18 @@ const useStyles = makeStyles({
     display: 'flex',
     flexFlow: 'column wrap',
   },
+  loadingRoot: {
+    margin: 'auto',
+  },
+  loadingStyle: {
+    color: '#D32026',
+  },
   headline: {
     color: '#0E0E0E',
     fontFamily: 'Lato, sans-serif',
     fontSize: '1.8rem',
     textAlign: 'center',
-    marginBottom: '1.5rem',
+    margin: '1.5rem 0rem',
   },
   formStyle: {
     display: 'flex',
@@ -74,7 +87,7 @@ const useStyles = makeStyles({
     width: '20rem',
     padding: '20px',
     display: 'flex',
-    justifyContent: 'space-between',
+    gap: '4rem',
     marginBottom: '1rem',
   },
   requestType: {
@@ -100,13 +113,17 @@ const useStyles = makeStyles({
 
 const Request = () => {
   const classes = useStyles();
-  const { request, setRequest } = useContext(UserContext);
+  const { request, setRequest, user } = useContext(UserContext);
 
   const [requestData, setRequestData] = useState([]);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     fetch('https://api.npoint.io/bd2bac5b1394b7859380')
       .then((res) => res.json())
-      .then((data) => setRequestData(data));
+      .then((data) => {
+        setRequestData(data);
+        setLoading(false);
+      });
   }, []);
 
   const handleBlur = (e) => {
@@ -120,7 +137,8 @@ const Request = () => {
     setRequest(newRequest);
   };
   const handleSubmit = (e) => {
-    console.log(request);
+    // console.log(request);
+    alert('Your request is published!');
     e.preventDefault();
     e.target.reset();
   };
@@ -139,6 +157,7 @@ const Request = () => {
           >
             <Sidebar></Sidebar>
           </Grid>
+
           <Grid
             style={{
               display: 'flex',
@@ -261,47 +280,53 @@ const Request = () => {
               </form>
             </Card>
 
-            <div className={classes.paperRoot}>
-              <h3 className={classes.headline}>Blood Requests</h3>
-              {requestData.map((item) => (
-                <Paper
-                  key={item.id}
-                  className={classes.paperStyle}
-                  elevation={3}
-                >
-                  <div className={classes.paperText}>
-                    <p className={classes.requestType}>{item.requestType}</p>
-                    <p>{item.Address}</p>
-                    <p className={classes.reqTimeStyle}>
-                      <span>{item.date} </span>
-                      <span> {item.time}</span>
-                    </p>
-                  </div>
-                  <div>
-                    {item.stage === 'managed' ? (
-                      <button
-                        style={{ backgroundColor: '#00C764' }}
-                        className={classes.stage}
-                      >
-                        {item.stage}
-                      </button>
-                    ) : (
-                      <button
-                        style={{ backgroundColor: '#D32026' }}
-                        className={classes.stage}
-                      >
-                        {item.stage}
-                      </button>
-                    )}
-                    <p>
-                      <span className={classes.group}>{item.group}</span>
-                      <span> {item.amount}</span>
-                    </p>
-                    <span>{item.relation}</span>
-                  </div>
-                </Paper>
-              ))}
-            </div>
+            {loading ? (
+              <div className={classes.loadingRoot}>
+                <CircularProgress className={classes.loadingStyle} />
+              </div>
+            ) : (
+              <div className={classes.paperRoot}>
+                <h3 className={classes.headline}>Blood Requests</h3>
+                {requestData.map((item) => (
+                  <Paper
+                    key={item.id}
+                    className={classes.paperStyle}
+                    elevation={3}
+                  >
+                    <div className={classes.paperText}>
+                      <p className={classes.requestType}>{item.requestType}</p>
+                      <p>{item.Address}</p>
+                      <p className={classes.reqTimeStyle}>
+                        <span>{item.date} </span>
+                        <span> {item.time}</span>
+                      </p>
+                    </div>
+                    <div>
+                      {item.stage === 'managed' ? (
+                        <button
+                          style={{ backgroundColor: '#00C764' }}
+                          className={classes.stage}
+                        >
+                          {item.stage}
+                        </button>
+                      ) : (
+                        <button
+                          style={{ backgroundColor: '#D32026' }}
+                          className={classes.stage}
+                        >
+                          {item.stage}
+                        </button>
+                      )}
+                      <p>
+                        <span className={classes.group}>{item.group}</span>
+                        <span> {item.amount}</span>
+                      </p>
+                      <span>{item.relation}</span>
+                    </div>
+                  </Paper>
+                ))}
+              </div>
+            )}
           </Grid>
         </Grid>
       </Container>

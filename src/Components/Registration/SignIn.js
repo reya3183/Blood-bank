@@ -110,7 +110,8 @@ const SignIn = () => {
         setUser(res);
         setSignedUser(res);
         console.log(user);
-        history.replace(from);
+        history.push(`/home`);
+        // history.replace(from);
       });
     }
     e.target.reset();

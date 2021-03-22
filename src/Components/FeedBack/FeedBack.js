@@ -4,6 +4,12 @@ import { UserContext } from '../../App';
 import Sidebar from '../Sidebar/Sidebar';
 
 const useStyles = makeStyles({
+  emailStyle: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+    fontFamily: 'Lato, sans-serif',
+    color: '#D32026',
+  },
   headline: {
     color: '#0E0E0E',
     fontFamily: 'Lato, sans-serif',
@@ -24,6 +30,7 @@ const useStyles = makeStyles({
   },
   textAreaStyle: {
     marginLeft: '30px',
+    margin: '5px',
     borderRadius: '15px',
     border: 'none',
     fontSize: '1.5rem',
@@ -43,7 +50,8 @@ const FeedBack = () => {
     setUser(newUser);
   };
   const handleSubmit = (e) => {
-    console.log(user);
+    // console.log(user);
+    alert('Your review is published!');
     e.preventDefault();
     e.target.reset();
   };
@@ -70,12 +78,13 @@ const FeedBack = () => {
             item
             xs={9}
           >
+            <p className={classes.emailStyle}>{user.email}</p>
             <form style={{ width: '25rem' }} onSubmit={handleSubmit}>
-              <h3 className={classes.headline}>Give Your Valuable Reviews!</h3>
+              <h3 className={classes.headline}>Give Your Valuable Review!</h3>
               <Card>
                 <textarea
                   name='feedback'
-                  cols='30'
+                  cols='33'
                   rows='5'
                   onBlur={handleBlur}
                   className={classes.textAreaStyle}

@@ -5,6 +5,9 @@ import HomeIcon from '@material-ui/icons/Home';
 import PersonIcon from '@material-ui/icons/Person';
 import FeedbackIcon from '@material-ui/icons/Feedback';
 import PostAddIcon from '@material-ui/icons/PostAdd';
+import SystemUpdateAltIcon from '@material-ui/icons/SystemUpdateAlt';
+import { useContext } from 'react';
+import { UserContext } from '../../App';
 const useStyles = makeStyles({
   image: {
     height: 'auto',
@@ -33,13 +36,18 @@ const useStyles = makeStyles({
 
 const Sidebar = () => {
   const classes = useStyles();
+  const { user } = useContext(UserContext);
+  const admin = user.email;
+  // if (admin === 'admin@gmail.com') {
+  //   console.log('ok');
+  // }
   return (
     <>
       <img className={classes.image} src={logo} alt='logo' />
       <h3>
         <span style={{ color: '#D32026' }}>Blood</span> Donation
       </h3>
-      <Link to='/'>
+      <Link to='/home'>
         <Button className={classes.btnStyle} variant='contained'>
           <HomeIcon className={classes.iconStyle} />
           Home
@@ -60,12 +68,21 @@ const Sidebar = () => {
         </Button>
       </Link>
       <br />
-      <Link to='/feedback'>
-        <Button className={classes.btnStyle} variant='contained'>
-          <FeedbackIcon className={classes.iconStyle} />
-          Feedback
-        </Button>
-      </Link>
+      {admin === 'admin@gmail.com' ? (
+        <Link to='/update'>
+          <Button className={classes.btnStyle} variant='contained'>
+            <SystemUpdateAltIcon className={classes.iconStyle} />
+            Update
+          </Button>
+        </Link>
+      ) : (
+        <Link to='/feedback'>
+          <Button className={classes.btnStyle} variant='contained'>
+            <FeedbackIcon className={classes.iconStyle} />
+            Feedback
+          </Button>
+        </Link>
+      )}
     </>
   );
 };

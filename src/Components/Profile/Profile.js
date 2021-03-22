@@ -1,4 +1,11 @@
-import { Card, Container, Grid, makeStyles, Paper } from '@material-ui/core';
+import {
+  Card,
+  CircularProgress,
+  Container,
+  Grid,
+  makeStyles,
+  Paper,
+} from '@material-ui/core';
 import { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../../App';
 import Sidebar from '../Sidebar/Sidebar';
@@ -8,6 +15,12 @@ const useStyles = makeStyles({
     maxWidth: '20rem',
     height: '22rem',
     padding: '0rem 2rem',
+  },
+  loadingRoot: {
+    margin: 'auto',
+  },
+  loadingStyle: {
+    color: '#D32026',
   },
   pic: {
     height: '10rem',
@@ -65,11 +78,15 @@ const useStyles = makeStyles({
 
 const Profile = () => {
   const classes = useStyles();
-  const { profileData, setProfileData } = useContext(UserContext);
+  const { profileData, setProfileData, user } = useContext(UserContext);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     fetch('https://api.npoint.io/8de9743b4c771e3b9d0c')
       .then((res) => res.json())
-      .then((data) => setProfileData(data));
+      .then((data) => {
+        setProfileData(data);
+        setLoading(false);
+      });
   }, []);
 
   const { name, pic, group, info, donations, requests } = profileData;
@@ -78,8 +95,8 @@ const Profile = () => {
     const btn = e.target;
     const date1 = new Date(donations[0].donationDate);
     const date2 = new Date(reqDate);
-    const total_seconds = Math.abs(date2 - date1) / 1000;
-    const days_difference = Math.floor(total_seconds / (60 * 60 * 24));
+    const diffInMs = Math.abs(date2 - date1);
+    const days_difference = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
 
     if (days_difference < 90) {
       btn.disabled = true;
@@ -106,91 +123,97 @@ const Profile = () => {
           >
             <Sidebar></Sidebar>
           </Grid>
-          <Grid
-            style={{
-              display: 'flex',
-              marginTop: '3rem',
-              justifyContent: 'space-around',
-            }}
-            item
-            md={9}
-          >
-            <Card className={classes.cardRoot}>
-              <img className={classes.pic} src={pic} alt='user-pic' />
-              <p>
-                <span className={classes.name}>{name}</span>
-                <span className={classes.group}>{group}</span>
-              </p>
-              <p className={classes.info}>{info}</p>
-            </Card>
-            <div
+          {loading ? (
+            <div className={classes.loadingRoot}>
+              <CircularProgress className={classes.loadingStyle} />
+            </div>
+          ) : (
+            <Grid
               style={{
                 display: 'flex',
-                flexFlow: 'column wrap',
+                marginTop: '3rem',
+                justifyContent: 'space-around',
               }}
+              item
+              md={9}
             >
-              <Paper className={classes.paperStyle} elevation={3}>
-                <h3 className={classes.headline}>Donations</h3>
-                {donations &&
-                  donations.map((item, index) => (
-                    <div
-                      style={{
-                        display: 'flex',
-                        flexFlow: 'row wrap',
-                        gap: '8rem',
-                      }}
-                      key={index}
-                    >
-                      <div>
-                        <p>{item.donationDate}</p>
+              <Card className={classes.cardRoot}>
+                <img className={classes.pic} src={pic} alt='user-pic' />
+                <p>
+                  <span className={classes.name}>{name}</span>
+                  <span className={classes.group}>{group}</span>
+                </p>
+                <p className={classes.info}>{info}</p>
+              </Card>
+              <div
+                style={{
+                  display: 'flex',
+                  flexFlow: 'column wrap',
+                }}
+              >
+                <Paper className={classes.paperStyle} elevation={3}>
+                  <h3 className={classes.headline}>Donations</h3>
+                  {donations &&
+                    donations.map((item, index) => (
+                      <div
+                        style={{
+                          display: 'flex',
+                          flexFlow: 'row wrap',
+                          gap: '8rem',
+                        }}
+                        key={index}
+                      >
+                        <div>
+                          <p>{item.donationDate}</p>
+                        </div>
+                        <div style={{ marginBottom: '.875rem' }}>
+                          <p style={{ color: '#4A4A4A', fontWeight: 'bold' }}>
+                            {item.address}
+                          </p>
+                          <p style={{ fontSize: '.885rem' }}>{item.amount}</p>
+                        </div>
                       </div>
-                      <div style={{ marginBottom: '.875rem' }}>
-                        <p style={{ color: '#4A4A4A', fontWeight: 'bold' }}>
-                          {item.address}
-                        </p>
-                        <p style={{ fontSize: '.885rem' }}>{item.amount}</p>
-                      </div>
-                    </div>
-                  ))}
-              </Paper>
-              <Paper className={classes.paperStyle} elevation={3}>
-                <div style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
-                  <h3 className={classes.headlineReq}>Requests</h3>
-                  <span style={{ color: '#4A4A4A' }}>
-                    Check your donation approval!
-                  </span>
-                </div>
+                    ))}
+                </Paper>
+                <Paper className={classes.paperStyle} elevation={3}>
+                  <div style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
+                    <h3 className={classes.headlineReq}>Requests</h3>
+                    <span style={{ color: '#4A4A4A' }}>
+                      Check your donation approval!
+                    </span>
+                  </div>
 
-                {requests &&
-                  requests.map((data, index) => (
-                    <div
-                      style={{
-                        display: 'flex',
-                        flexFlow: 'row wrap',
-                        gap: '8rem',
-                      }}
-                      key={index}
-                    >
-                      <div>
-                        <p>{data.requestDate}</p>
+                  {requests &&
+                    requests.map((data, index) => (
+                      <div
+                        style={{
+                          display: 'flex',
+                          flexFlow: 'row wrap',
+                          gap: '8rem',
+                        }}
+                        key={index}
+                      >
+                        <div>
+                          <p>{data.requestDate}</p>
+                        </div>
+                        <div style={{ marginBottom: '.875rem' }}>
+                          <p style={{ color: '#4A4A4A', fontWeight: 'bold' }}>
+                            {data.address}
+                          </p>
+                          <p style={{ fontSize: '.885rem' }}>{data.amount}</p>
+                          <button
+                            className={classes.acceptBtn}
+                            onClick={(e) => handleClick(data.requestDate, e)}
+                          >
+                            accept
+                          </button>
+                        </div>
                       </div>
-                      <div style={{ marginBottom: '.875rem' }}>
-                        <p style={{ color: '#4A4A4A', fontWeight: 'bold' }}>
-                          {data.address}
-                        </p>
-                        <p style={{ fontSize: '.885rem' }}>{data.amount}</p>
-                        <button
-                          className={classes.acceptBtn}
-                          onClick={(e) => handleClick(data.requestDate, e)}
-                        >
-                          accept
-                        </button>
-                      </div>
-                    </div>
-                  ))}
-              </Paper>
-            </div>
-          </Grid>
+                    ))}
+                </Paper>
+              </div>
+            </Grid>
+          )}
         </Grid>
       </Container>
     </div>
