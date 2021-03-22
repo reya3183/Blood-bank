@@ -8,22 +8,6 @@ export const initializeFramework = () => {
   }
 };
 
-export const handleSignOut = () => {
-  return firebase
-    .auth()
-    .signOut()
-    .then((res) => {
-      const signedOutUser = {
-        signedIn: false,
-      };
-      console.log('success');
-      return signedOutUser;
-    })
-    .catch((error) => {
-      // An error happened.
-    });
-};
-
 export const createUserWithEmailAndPassword = (name, email, password) => {
   return firebase
     .auth()
@@ -63,7 +47,6 @@ export const signInWithEmailAndPassword = (email, password) => {
 
 export const resetPassword = (email) => {
   var auth = firebase.auth();
-
   auth
     .sendPasswordResetEmail(email)
     .then(function () {

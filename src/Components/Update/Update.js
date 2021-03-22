@@ -76,7 +76,6 @@ const Update = () => {
             xs={3}
             style={{
               backgroundColor: 'white',
-              textAlign: 'center',
               paddingTop: '3rem',
             }}
           >

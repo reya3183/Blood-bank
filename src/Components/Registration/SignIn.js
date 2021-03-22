@@ -1,5 +1,5 @@
 import { Container, Grid, makeStyles } from '@material-ui/core';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import logo from '../../images/149-1497912_blood-donation-up-donor-darah-logo-png__1_-removebg-preview.png';
 import { UserContext } from '../../App';
@@ -74,14 +74,6 @@ const SignIn = () => {
   const history = useHistory();
   const location = useLocation();
   const { from } = location.state || { from: { pathname: '/' } };
-  // const [user, setUser] = useState({
-  //   signedIn: true,
-  //   name: '',
-  //   email: '',
-  //   password: '',
-  //   error: '',
-  //   success: false,
-  // });
 
   initializeFramework();
   const { user, setUser, setSignedUser } = useContext(UserContext);
@@ -109,7 +101,7 @@ const SignIn = () => {
       signInWithEmailAndPassword(user.email, user.password).then((res) => {
         setUser(res);
         setSignedUser(res);
-        console.log(user);
+        // console.log(user);
         history.push(`/home`);
         // history.replace(from);
       });

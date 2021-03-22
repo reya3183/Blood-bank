@@ -1,13 +1,7 @@
-import {
-  Card,
-  CircularProgress,
-  Container,
-  Grid,
-  makeStyles,
-  Paper,
-} from '@material-ui/core';
+import { Card, Container, Grid, makeStyles, Paper } from '@material-ui/core';
 import { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../../App';
+import Loading from '../Loading/Loading';
 import Sidebar from '../Sidebar/Sidebar';
 const useStyles = makeStyles({
   root: {
@@ -18,12 +12,6 @@ const useStyles = makeStyles({
   paperRoot: {
     display: 'flex',
     flexFlow: 'column wrap',
-  },
-  loadingRoot: {
-    margin: 'auto',
-  },
-  loadingStyle: {
-    color: '#D32026',
   },
   headline: {
     color: '#0E0E0E',
@@ -99,9 +87,9 @@ const useStyles = makeStyles({
     fontSize: '.785rem',
   },
   stage: {
-    padding: '5px',
+    padding: '5px 8px',
     border: 'none',
-    borderRadius: '25px',
+    borderRadius: '15px',
     color: 'white',
     cursor: 'pointer',
   },
@@ -113,9 +101,10 @@ const useStyles = makeStyles({
 
 const Request = () => {
   const classes = useStyles();
-  const { request, setRequest, user } = useContext(UserContext);
+  const { request, setRequest, requestData, setRequestData } = useContext(
+    UserContext
+  );
 
-  const [requestData, setRequestData] = useState([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     fetch('https://api.npoint.io/bd2bac5b1394b7859380')
@@ -151,8 +140,7 @@ const Request = () => {
             md={3}
             style={{
               backgroundColor: 'white',
-              textAlign: 'center',
-              paddingTop: '3rem',
+              paddingTop: '2rem',
             }}
           >
             <Sidebar></Sidebar>
@@ -161,7 +149,7 @@ const Request = () => {
           <Grid
             style={{
               display: 'flex',
-              marginTop: '3rem',
+              marginTop: '1rem',
               justifyContent: 'space-around',
             }}
             item
@@ -281,9 +269,7 @@ const Request = () => {
             </Card>
 
             {loading ? (
-              <div className={classes.loadingRoot}>
-                <CircularProgress className={classes.loadingStyle} />
-              </div>
+              <Loading></Loading>
             ) : (
               <div className={classes.paperRoot}>
                 <h3 className={classes.headline}>Blood Requests</h3>
@@ -293,7 +279,7 @@ const Request = () => {
                     className={classes.paperStyle}
                     elevation={3}
                   >
-                    <div className={classes.paperText}>
+                    <div>
                       <p className={classes.requestType}>{item.requestType}</p>
                       <p>{item.Address}</p>
                       <p className={classes.reqTimeStyle}>

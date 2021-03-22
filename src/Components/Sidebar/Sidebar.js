@@ -6,6 +6,8 @@ import PersonIcon from '@material-ui/icons/Person';
 import FeedbackIcon from '@material-ui/icons/Feedback';
 import PostAddIcon from '@material-ui/icons/PostAdd';
 import SystemUpdateAltIcon from '@material-ui/icons/SystemUpdateAlt';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import NotificationsIcon from '@material-ui/icons/Notifications';
 import { useContext } from 'react';
 import { UserContext } from '../../App';
 const useStyles = makeStyles({
@@ -22,7 +24,7 @@ const useStyles = makeStyles({
     color: 'black',
     boxShadow: 'none',
     fontSize: '.875rem',
-    margin: '.5rem 0rem',
+    margin: '3px 0px',
     '&:hover,&:focus,&:active,&:visited': {
       backgroundColor: 'transparent',
       color: '#D32026',
@@ -36,15 +38,18 @@ const useStyles = makeStyles({
 
 const Sidebar = () => {
   const classes = useStyles();
-  const { user } = useContext(UserContext);
+  const { user, setSignedUser } = useContext(UserContext);
   const admin = user.email;
-  // if (admin === 'admin@gmail.com') {
-  //   console.log('ok');
-  // }
   return (
-    <>
+    <div
+      style={{
+        display: 'flex',
+        flexFlow: 'column wrap',
+        alignItems: 'center',
+      }}
+    >
       <img className={classes.image} src={logo} alt='logo' />
-      <h3>
+      <h3 style={{ textAlign: 'center', marginBottom: '2rem' }}>
         <span style={{ color: '#D32026' }}>Blood</span> Donation
       </h3>
       <Link to='/home'>
@@ -53,21 +58,18 @@ const Sidebar = () => {
           Home
         </Button>
       </Link>
-      <br />
       <Link to='/profile'>
         <Button className={classes.btnStyle} variant='contained'>
           <PersonIcon className={classes.iconStyle} />
           Profile
         </Button>
       </Link>
-      <br />
       <Link to='/request'>
         <Button className={classes.btnStyle} variant='contained'>
           <PostAddIcon className={classes.iconStyle} />
           Request
         </Button>
       </Link>
-      <br />
       {admin === 'admin@gmail.com' ? (
         <Link to='/update'>
           <Button className={classes.btnStyle} variant='contained'>
@@ -76,14 +78,23 @@ const Sidebar = () => {
           </Button>
         </Link>
       ) : (
-        <Link to='/feedback'>
+        <Link to='/notification'>
           <Button className={classes.btnStyle} variant='contained'>
-            <FeedbackIcon className={classes.iconStyle} />
-            Feedback
+            <NotificationsIcon className={classes.iconStyle} />
+            Notification
           </Button>
         </Link>
       )}
-    </>
+      <br />
+      <Button
+        onClick={() => setSignedUser({})}
+        className={classes.btnStyle}
+        variant='contained'
+      >
+        <ExitToAppIcon className={classes.iconStyle} />
+        SignOut
+      </Button>
+    </div>
   );
 };
 

@@ -5,7 +5,6 @@ import logo from '../../images/149-1497912_blood-donation-up-donor-darah-logo-pn
 import {
   createUserWithEmailAndPassword,
   initializeFramework,
-  writeUserData,
 } from './registerManager';
 import { useHistory } from 'react-router';
 

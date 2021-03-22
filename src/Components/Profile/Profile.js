@@ -34,6 +34,7 @@ const useStyles = makeStyles({
     border: '1px solid #D32026',
     borderRadius: '50%',
     padding: '5px',
+    marginTop: '-10px',
   },
   headline: {
     color: '#D32026',
@@ -54,7 +55,7 @@ const useStyles = makeStyles({
   },
   info: {
     color: '#ACACAC',
-    margin: '20px 0px',
+    margin: '10px 0px',
   },
   paperStyle: {
     width: '30rem',
@@ -78,7 +79,7 @@ const useStyles = makeStyles({
 
 const Profile = () => {
   const classes = useStyles();
-  const { profileData, setProfileData, user } = useContext(UserContext);
+  const { profileData, setProfileData } = useContext(UserContext);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     fetch('https://api.npoint.io/8de9743b4c771e3b9d0c')
@@ -89,7 +90,7 @@ const Profile = () => {
       });
   }, []);
 
-  const { name, pic, group, info, donations, requests } = profileData;
+  const { name, pic, group, info, address, donations, requests } = profileData;
 
   const handleClick = (reqDate, e) => {
     const btn = e.target;
@@ -117,7 +118,6 @@ const Profile = () => {
             md={3}
             style={{
               backgroundColor: 'white',
-              textAlign: 'center',
               paddingTop: '3rem',
             }}
           >
@@ -139,10 +139,11 @@ const Profile = () => {
             >
               <Card className={classes.cardRoot}>
                 <img className={classes.pic} src={pic} alt='user-pic' />
-                <p>
-                  <span className={classes.name}>{name}</span>
+                <div>
+                  <p className={classes.name}>{name}</p>
+                  <span className={classes.address}>{address}</span>
                   <span className={classes.group}>{group}</span>
-                </p>
+                </div>
                 <p className={classes.info}>{info}</p>
               </Card>
               <div

@@ -10,10 +10,10 @@ import ExtraInfo from './Components/ExtraInfo/ExtraInfo';
 import StartJourney from './Components/StartJourney/StartJourney';
 import Home from './Components/Home/Home';
 import Request from './Components/Request/Request';
-import FeedBack from './Components/FeedBack/FeedBack';
 import Profile from './Components/Profile/Profile';
 import PrivateRoute from './Components/PrivateRoute/PrivateRoute';
 import Update from './Components/Update/Update';
+import Notification from './Components/Notification/Notification';
 
 export const UserContext = createContext();
 
@@ -22,8 +22,9 @@ function App() {
   const [donors, setDonors] = useState({});
   const [request, setRequest] = useState({});
   const [profileData, setProfileData] = useState({});
+  const [requestData, setRequestData] = useState([]);
+  const [reviewData, setReviewData] = useState([]);
   const [user, setUser] = useState({
-    signedIn: true,
     name: '',
     email: '',
   });
@@ -40,6 +41,10 @@ function App() {
         setProfileData,
         donors,
         setDonors,
+        requestData,
+        setRequestData,
+        reviewData,
+        setReviewData,
       }}
     >
       <Router>
@@ -71,8 +76,8 @@ function App() {
           <Route path='/request'>
             <Request></Request>
           </Route>
-          <Route path='/feedback'>
-            <FeedBack></FeedBack>
+          <Route path='/notification'>
+            <Notification></Notification>
           </Route>
           <Route path='/profile'>
             <Profile></Profile>

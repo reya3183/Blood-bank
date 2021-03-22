@@ -3,7 +3,6 @@ import React, { useContext } from 'react';
 import { useHistory } from 'react-router';
 import { UserContext } from '../../App';
 import logo from '../../images/149-1497912_blood-donation-up-donor-darah-logo-png__1_-removebg-preview.png';
-import { writeUserData } from '../Registration/registerManager';
 const useStyles = makeStyles({
   image: {
     height: 'auto',

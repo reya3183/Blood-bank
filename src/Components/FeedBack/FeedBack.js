@@ -1,15 +1,8 @@
-import { Card, Container, Grid, makeStyles } from '@material-ui/core';
+import { Card, makeStyles } from '@material-ui/core';
 import { useContext } from 'react';
 import { UserContext } from '../../App';
-import Sidebar from '../Sidebar/Sidebar';
 
 const useStyles = makeStyles({
-  emailStyle: {
-    display: 'flex',
-    justifyContent: 'flex-end',
-    fontFamily: 'Lato, sans-serif',
-    color: '#D32026',
-  },
   headline: {
     color: '#0E0E0E',
     fontFamily: 'Lato, sans-serif',
@@ -56,51 +49,22 @@ const FeedBack = () => {
     e.target.reset();
   };
   return (
-    <div style={{ backgroundColor: '#F6F7F9' }}>
-      <Container>
-        <Grid container spacing={2}>
-          <Grid
-            item
-            xs={3}
-            style={{
-              backgroundColor: 'white',
-              textAlign: 'center',
-              paddingTop: '3rem',
-            }}
-          >
-            <Sidebar></Sidebar>
-          </Grid>
-          <Grid
-            style={{
-              marginTop: '3rem',
-              padding: '3rem',
-            }}
-            item
-            xs={9}
-          >
-            <p className={classes.emailStyle}>{user.email}</p>
-            <form style={{ width: '25rem' }} onSubmit={handleSubmit}>
-              <h3 className={classes.headline}>Give Your Valuable Review!</h3>
-              <Card>
-                <textarea
-                  name='feedback'
-                  cols='33'
-                  rows='5'
-                  onBlur={handleBlur}
-                  className={classes.textAreaStyle}
-                  required
-                />
-              </Card>
-              <br />
-              <input
-                type='submit'
-                value='Publish'
-                className={classes.publishStyle}
-              />
-            </form>
-          </Grid>
-        </Grid>
-      </Container>
+    <div style={{ marginTop: '3rem' }}>
+      <form style={{ width: '25rem' }} onSubmit={handleSubmit}>
+        <h3 className={classes.headline}>Give Your Valuable Review!</h3>
+        <Card>
+          <textarea
+            name='feedback'
+            cols='33'
+            rows='5'
+            onBlur={handleBlur}
+            className={classes.textAreaStyle}
+            required
+          />
+        </Card>
+        <br />
+        <input type='submit' value='Publish' className={classes.publishStyle} />
+      </form>
     </div>
   );
 };
