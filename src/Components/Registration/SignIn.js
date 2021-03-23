@@ -50,6 +50,7 @@ const useStyles = makeStyles({
     color: 'white',
     fontSize: '.875rem',
     marginBottom: '20px',
+    cursor: 'pointer',
   },
   linkStyle: {
     fontWeight: 'bold',
