@@ -102,7 +102,6 @@ const SignIn = () => {
       signInWithEmailAndPassword(user.email, user.password).then((res) => {
         setUser(res);
         setSignedUser(res);
-        // console.log(user);
         history.replace(from);
       });
     }
