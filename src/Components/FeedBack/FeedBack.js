@@ -50,7 +50,7 @@ const FeedBack = () => {
   };
   return (
     <div style={{ marginTop: '3rem' }}>
-      <form style={{ width: '25rem' }} onSubmit={handleSubmit}>
+      <form style={{ maxWidth: '25rem' }} onSubmit={handleSubmit}>
         <h3 className={classes.headline}>Give Your Valuable Review!</h3>
         <Card>
           <textarea

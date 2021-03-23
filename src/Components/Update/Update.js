@@ -71,9 +71,13 @@ const Update = () => {
     <div style={{ backgroundColor: '#F6F7F9' }}>
       <Container>
         <Grid container spacing={2}>
+          {/* sidebar */}
           <Grid
             item
-            xs={3}
+            xs={12}
+            sm={12}
+            md={3}
+            lg={3}
             style={{
               backgroundColor: 'white',
               paddingTop: '3rem',
@@ -81,14 +85,19 @@ const Update = () => {
           >
             <Sidebar></Sidebar>
           </Grid>
+          {/* end sidebar */}
           <Grid
             style={{
               marginTop: '3rem',
               padding: '3rem',
             }}
             item
-            xs={9}
+            xs={12}
+            sm={12}
+            md={9}
+            lg={9}
           >
+            {/* start update form */}
             <Card className={classes.root}>
               <form className={classes.formStyle} onSubmit={handleSubmit}>
                 <label className={classes.labelStyle}>
@@ -132,6 +141,7 @@ const Update = () => {
                 ></input>
               </form>
             </Card>
+            {/* end update form */}
           </Grid>
         </Grid>
       </Container>

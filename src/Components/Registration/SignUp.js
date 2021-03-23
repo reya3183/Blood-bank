@@ -38,7 +38,7 @@ const useStyles = makeStyles({
   },
   signUpStyle: {
     textAlign: 'center',
-    padding: '15px 125px',
+    padding: '.975rem 8rem',
     borderRadius: '25px',
     border: 'none',
     backgroundColor: '#D32026',
@@ -47,6 +47,7 @@ const useStyles = makeStyles({
     margin: '20px 0px',
   },
 });
+
 const SignUp = () => {
   const classes = useStyles();
   initializeFramework();
@@ -54,13 +55,6 @@ const SignUp = () => {
   const { user, setUser, setSignedUser } = useContext(UserContext);
   const [createUser, setCreateUser] = useState(true);
   const history = useHistory();
-  // const [user, setUser] = useState({
-  //   signedIn: true,
-  //   name: '',
-  //   email: '',
-  //   error: '',
-  //   success: false,
-  // });
 
   const handleBlur = (e) => {
     let fieldValid = true;
@@ -85,15 +79,13 @@ const SignUp = () => {
         (res) => {
           setUser(res);
           setSignedUser(res);
-          if (user.success) {
-            history.push(`/group`);
-          }
+          // if (user.success === true) {
+          // e.target.querySelector('input[type="submit"]').value = ' Next';
+          history.push(`/group`);
+          // }
         }
       );
     }
-    // if (user.success) {
-    //   history.push(`/group`);
-    // }
 
     e.target.reset();
     e.preventDefault();
@@ -102,13 +94,15 @@ const SignUp = () => {
   return (
     <Container style={{ textAlign: 'center' }}>
       <Grid container direction='row' justify='center' alignItems='center'>
-        <Grid item xs={12} sm={6} md={6}>
+        <Grid item xs={12} sm={12} md={6} lg={6}>
+          {/* logo */}
           <img src={logo} alt='logo' className={classes.image} />
           <h1>
             <span className={classes.red}>Blood</span> Donation
           </h1>
         </Grid>
-        <Grid style={{ color: '#6F6F6F' }} item xs={12} sm={6} md={6}>
+        <Grid style={{ color: '#6F6F6F' }} item xs={12} sm={12} md={6} lg={6}>
+          {/* signup form */}
           <h2 className={classes.headline}>Let's know about Yourself</h2>
           <form onSubmit={handleSubmit}>
             <label className={classes.labelStyle}>
@@ -149,10 +143,10 @@ const SignUp = () => {
             <input
               className={classes.signUpStyle}
               type='submit'
-              value='Sign Up'
+              value='Next'
             ></input>
           </form>
-          <p>{user.error}</p>
+          {/*end signup form */}
         </Grid>
       </Grid>
     </Container>

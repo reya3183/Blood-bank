@@ -3,15 +3,20 @@ import { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../../App';
 import Loading from '../Loading/Loading';
 import Sidebar from '../Sidebar/Sidebar';
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: '32rem',
     height: '30rem',
     margin: '2rem',
+    [theme.breakpoints.down('xs')]: {
+      height: 'auto',
+    },
   },
   paperRoot: {
     display: 'flex',
-    flexFlow: 'column wrap',
+    flexFlow: 'column',
+    maxHeight: '30rem',
+    overflowY: 'auto',
   },
   headline: {
     color: '#0E0E0E',
@@ -24,6 +29,9 @@ const useStyles = makeStyles({
     display: 'flex',
     flexFlow: 'row wrap',
     justifyContent: 'center',
+    [theme.breakpoints.down('xs')]: {
+      flexFlow: 'column wrap',
+    },
   },
   labelStyle: {
     display: 'block',
@@ -42,7 +50,7 @@ const useStyles = makeStyles({
   },
   relStyle: {
     marginLeft: '30px',
-    padding: '8px 110px',
+    padding: '.5rem 5rem',
     borderRadius: '15px',
     border: 'none',
     backgroundColor: '#EDF0F5',
@@ -63,7 +71,7 @@ const useStyles = makeStyles({
   publishStyle: {
     cursor: 'pointer',
     textAlign: 'center',
-    padding: '8px 110px',
+    padding: '.5rem 8rem',
     borderRadius: '25px',
     border: 'none',
     backgroundColor: '#D32026',
@@ -97,7 +105,24 @@ const useStyles = makeStyles({
     color: 'black',
     fontWeight: 'bold',
   },
-});
+  gridStyle: {
+    backgroundColor: 'white',
+
+    [theme.breakpoints.down('xs')]: {
+      display: 'flex',
+      flexFlow: 'column wrap',
+    },
+  },
+  flexGridStyle: {
+    display: 'flex',
+    marginTop: '1rem',
+    justifyContent: 'space-around',
+    [theme.breakpoints.down('xs')]: {
+      display: 'flex',
+      flexFlow: 'column wrap',
+    },
+  },
+}));
 
 const Request = () => {
   const classes = useStyles();
@@ -106,6 +131,7 @@ const Request = () => {
   );
 
   const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     fetch('https://api.npoint.io/bd2bac5b1394b7859380')
       .then((res) => res.json())
@@ -120,41 +146,44 @@ const Request = () => {
     newRequest[e.target.name] = e.target.value;
     setRequest(newRequest);
   };
+
   const handleChange = (e) => {
     const newRequest = { ...request };
     newRequest[e.target.name] = e.target.value;
     setRequest(newRequest);
   };
+
   const handleSubmit = (e) => {
-    // console.log(request);
     alert('Your request is published!');
     e.preventDefault();
     e.target.reset();
   };
+
   return (
     <div style={{ backgroundColor: '#F6F7F9' }}>
       <Container>
         <Grid container spacing={2}>
+          {/* sidebar */}
           <Grid
             item
+            xs={12}
+            sm={12}
             md={3}
-            style={{
-              backgroundColor: 'white',
-              paddingTop: '2rem',
-            }}
+            lg={3}
+            className={classes.gridStyle}
           >
             <Sidebar></Sidebar>
           </Grid>
-
+          {/*end  sidebar */}
           <Grid
-            style={{
-              display: 'flex',
-              marginTop: '1rem',
-              justifyContent: 'space-around',
-            }}
+            className={classes.flexGridStyle}
             item
+            xs={12}
+            sm={12}
             md={9}
+            lg={9}
           >
+            {/* request form */}
             <Card className={classes.root}>
               <h3 className={classes.headline}>Request Form</h3>
               <form className={classes.formStyle} onSubmit={handleSubmit}>
@@ -267,11 +296,14 @@ const Request = () => {
                 ></input>
               </form>
             </Card>
+            {/* end request form */}
 
             {loading ? (
+              //loader
               <Loading></Loading>
             ) : (
               <div className={classes.paperRoot}>
+                {/* all requests */}
                 <h3 className={classes.headline}>Blood Requests</h3>
                 {requestData.map((item) => (
                   <Paper
@@ -313,6 +345,7 @@ const Request = () => {
                 ))}
               </div>
             )}
+            {/* all requests end*/}
           </Grid>
         </Grid>
       </Container>

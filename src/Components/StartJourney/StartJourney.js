@@ -5,7 +5,7 @@ import logo from '../../images/149-1497912_blood-donation-up-donor-darah-logo-pn
 const useStyles = makeStyles({
   image: {
     height: 'auto',
-    maxWidth: '150px',
+    maxWidth: '9rem',
     marginTop: '8rem',
   },
   red: {
@@ -14,7 +14,7 @@ const useStyles = makeStyles({
   nextStyle: {
     cursor: 'pointer',
     textAlign: 'center',
-    padding: '15px 110px',
+    padding: '.975rem 8rem',
     borderRadius: '25px',
     border: 'none',
     backgroundColor: '#D32026',
@@ -36,11 +36,13 @@ const StartJourney = () => {
   return (
     <Container style={{ textAlign: 'center' }}>
       <Grid container direction='row' justify='center' alignItems='center'>
-        <Grid item xs={12} sm={12} md={12}>
+        <Grid item xs={12} sm={12} md={12} lg={12}>
+          {/* logo */}
           <img src={logo} alt='logo' className={classes.image} />
           <h1>
             <span className={classes.red}>Blood</span> Donation
           </h1>
+
           <Button
             onClick={handleClick}
             className={classes.nextStyle}

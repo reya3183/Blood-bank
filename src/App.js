@@ -67,12 +67,9 @@ function App() {
           <Route path='/start'>
             <StartJourney></StartJourney>
           </Route>
-          {/* <PrivateRoute path='/home'>
+          <PrivateRoute path='/home'>
             <Home></Home>
-          </PrivateRoute> */}
-          <Route path='/home'>
-            <Home></Home>
-          </Route>
+          </PrivateRoute>
           <Route path='/request'>
             <Request></Request>
           </Route>

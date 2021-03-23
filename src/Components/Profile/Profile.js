@@ -1,26 +1,17 @@
-import {
-  Card,
-  CircularProgress,
-  Container,
-  Grid,
-  makeStyles,
-  Paper,
-} from '@material-ui/core';
+import { Card, Container, Grid, makeStyles, Paper } from '@material-ui/core';
 import { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../../App';
+import Loading from '../Loading/Loading';
 import Sidebar from '../Sidebar/Sidebar';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   cardRoot: {
     maxWidth: '20rem',
     height: '22rem',
     padding: '0rem 2rem',
-  },
-  loadingRoot: {
-    margin: 'auto',
-  },
-  loadingStyle: {
-    color: '#D32026',
+    [theme.breakpoints.down('sm')]: {
+      marginBottom: '3rem',
+    },
   },
   pic: {
     height: '10rem',
@@ -58,10 +49,18 @@ const useStyles = makeStyles({
     margin: '10px 0px',
   },
   paperStyle: {
-    width: '30rem',
+    maxWidth: '30rem',
     height: 'auto',
     padding: '1rem 2.5rem',
     marginBottom: '2rem',
+  },
+  donationDiv: {
+    display: 'flex',
+    flexFlow: 'row wrap',
+    gap: '8rem',
+    [theme.breakpoints.down('sm')]: {
+      gap: '2rem',
+    },
   },
   acceptBtn: {
     padding: '3px 8px',
@@ -75,7 +74,31 @@ const useStyles = makeStyles({
       color: 'white',
     },
   },
-});
+  gridStyle: {
+    backgroundColor: 'white',
+    [theme.breakpoints.down('xs')]: {
+      display: 'flex',
+      flexFlow: 'column wrap',
+    },
+  },
+  flexGridStyle: {
+    display: 'flex',
+    marginTop: '3rem',
+    justifyContent: 'space-around',
+    [theme.breakpoints.down('xs')]: {
+      display: 'flex',
+      flexFlow: 'column wrap',
+    },
+  },
+  requestDiv: {
+    display: 'flex',
+    flexFlow: 'row wrap',
+    gap: '8rem',
+    [theme.breakpoints.down('sm')]: {
+      gap: '2rem',
+    },
+  },
+}));
 
 const Profile = () => {
   const classes = useStyles();
@@ -109,34 +132,37 @@ const Profile = () => {
       alert('Wow! you can donate!');
     }
   };
+
   return (
     <div style={{ backgroundColor: '#F6F7F9' }}>
       <Container>
         <Grid container spacing={2}>
+          {/* sidebar */}
           <Grid
             item
+            xs={12}
+            sm={12}
             md={3}
-            style={{
-              backgroundColor: 'white',
-              paddingTop: '3rem',
-            }}
+            lg={3}
+            className={classes.gridStyle}
           >
             <Sidebar></Sidebar>
           </Grid>
+          {/*end sidebar */}
+
           {loading ? (
-            <div className={classes.loadingRoot}>
-              <CircularProgress className={classes.loadingStyle} />
-            </div>
+            // loader
+            <Loading></Loading>
           ) : (
             <Grid
-              style={{
-                display: 'flex',
-                marginTop: '3rem',
-                justifyContent: 'space-around',
-              }}
+              className={classes.flexGridStyle}
               item
+              xs={12}
+              sm={12}
               md={9}
+              lg={9}
             >
+              {/* user profile card */}
               <Card className={classes.cardRoot}>
                 <img className={classes.pic} src={pic} alt='user-pic' />
                 <div>
@@ -146,24 +172,20 @@ const Profile = () => {
                 </div>
                 <p className={classes.info}>{info}</p>
               </Card>
+
+              {/* user profile card */}
               <div
                 style={{
                   display: 'flex',
                   flexFlow: 'column wrap',
                 }}
               >
+                {/* user donations */}
                 <Paper className={classes.paperStyle} elevation={3}>
-                  <h3 className={classes.headline}>Donations</h3>
+                  <h3 className={classes.headline}>Your Donations</h3>
                   {donations &&
                     donations.map((item, index) => (
-                      <div
-                        style={{
-                          display: 'flex',
-                          flexFlow: 'row wrap',
-                          gap: '8rem',
-                        }}
-                        key={index}
-                      >
+                      <div className={classes.donationDiv} key={index}>
                         <div>
                           <p>{item.donationDate}</p>
                         </div>
@@ -176,6 +198,7 @@ const Profile = () => {
                       </div>
                     ))}
                 </Paper>
+                {/* all requests */}
                 <Paper className={classes.paperStyle} elevation={3}>
                   <div style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
                     <h3 className={classes.headlineReq}>Requests</h3>
@@ -186,14 +209,7 @@ const Profile = () => {
 
                   {requests &&
                     requests.map((data, index) => (
-                      <div
-                        style={{
-                          display: 'flex',
-                          flexFlow: 'row wrap',
-                          gap: '8rem',
-                        }}
-                        key={index}
-                      >
+                      <div className={classes.requestDiv} key={index}>
                         <div>
                           <p>{data.requestDate}</p>
                         </div>
@@ -212,6 +228,7 @@ const Profile = () => {
                       </div>
                     ))}
                 </Paper>
+                {/* all requests end */}
               </div>
             </Grid>
           )}

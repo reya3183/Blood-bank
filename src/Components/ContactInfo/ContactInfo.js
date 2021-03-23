@@ -34,7 +34,7 @@ const useStyles = makeStyles({
   nextStyle: {
     cursor: 'pointer',
     textAlign: 'center',
-    padding: '15px 110px',
+    padding: '.975rem 7.7rem',
     borderRadius: '25px',
     border: 'none',
     backgroundColor: '#D32026',
@@ -70,7 +70,8 @@ const ContactInfo = () => {
   return (
     <Container style={{ textAlign: 'center' }}>
       <Grid container direction='row' justify='center' alignItems='flex-start'>
-        <Grid item xs={12} sm={6} md={6}>
+        {/* info form */}
+        <Grid item xs={12} sm={12} md={6} lg={6}>
           <img src={logo} alt='logo' className={classes.image} />
           <h1>
             <span className={classes.red}>Blood</span> Donation
@@ -81,7 +82,8 @@ const ContactInfo = () => {
             <span className={classes.red}>Present</span> address.
           </p>
         </Grid>
-        <Grid style={{ color: '#6F6F6F' }} item xs={12} sm={6} md={6}>
+        {/* contact form */}
+        <Grid style={{ color: '#6F6F6F' }} item xs={12} sm={12} md={6} lg={6}>
           <h2 className={classes.headline}>Contact Information</h2>
           <form onSubmit={handleSubmit}>
             <label className={classes.labelStyle}>
@@ -158,6 +160,7 @@ const ContactInfo = () => {
             ></input>
           </form>
         </Grid>
+        {/*end contact form */}
       </Grid>
     </Container>
   );

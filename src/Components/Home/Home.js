@@ -11,7 +11,7 @@ import './Home.css';
 import Loading from '../Loading/Loading';
 import FeedBack from '../FeedBack/FeedBack';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   paperStyle: {
     padding: '20px',
   },
@@ -45,7 +45,14 @@ const useStyles = makeStyles({
     color: '#D32026',
     marginBottom: '1rem',
   },
-});
+  gridStyle: {
+    backgroundColor: 'white',
+    [theme.breakpoints.down('xs')]: {
+      display: 'flex',
+      flexFlow: 'column wrap',
+    },
+  },
+}));
 
 const Home = () => {
   const classes = useStyles();
@@ -98,24 +105,30 @@ const Home = () => {
     <div style={{ backgroundColor: '#F6F7F9' }}>
       <Container>
         <Grid container spacing={2}>
+          {/* sidebar */}
           <Grid
             item
-            xs={3}
-            style={{
-              backgroundColor: 'white',
-              paddingTop: '3rem',
-            }}
+            xs={12}
+            md={3}
+            sm={12}
+            lg={3}
+            className={classes.gridStyle}
           >
             <Sidebar></Sidebar>
           </Grid>
+          {/*end sidebar */}
           <Grid
             style={{
               marginTop: '1rem',
               padding: '3rem',
             }}
             item
-            xs={9}
+            xs={12}
+            sm={12}
+            md={9}
+            lg={9}
           >
+            {/* all reviews */}
             <h3 className={classes.headline}>Reviews</h3>
             <p className={classes.emailStyle}>{user.email}</p>
             {loading ? (
@@ -138,6 +151,7 @@ const Home = () => {
                 ))}
               </Slider>
             )}
+            {/* feedback form */}
             <FeedBack></FeedBack>
           </Grid>
         </Grid>

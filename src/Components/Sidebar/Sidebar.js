@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { Button, makeStyles } from '@material-ui/core';
 import HomeIcon from '@material-ui/icons/Home';
 import PersonIcon from '@material-ui/icons/Person';
-import FeedbackIcon from '@material-ui/icons/Feedback';
 import PostAddIcon from '@material-ui/icons/PostAdd';
 import SystemUpdateAltIcon from '@material-ui/icons/SystemUpdateAlt';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
@@ -13,7 +12,7 @@ import { UserContext } from '../../App';
 const useStyles = makeStyles({
   image: {
     height: 'auto',
-    maxWidth: '150px',
+    maxWidth: '9rem',
     margin: '0px auto',
   },
   btnStyle: {
@@ -46,12 +45,15 @@ const Sidebar = () => {
         display: 'flex',
         flexFlow: 'column wrap',
         alignItems: 'center',
+        marginTop: '3rem',
       }}
     >
+      {/* logo */}
       <img className={classes.image} src={logo} alt='logo' />
       <h3 style={{ textAlign: 'center', marginBottom: '2rem' }}>
         <span style={{ color: '#D32026' }}>Blood</span> Donation
       </h3>
+      {/* sidebar */}
       <Link to='/home'>
         <Button className={classes.btnStyle} variant='contained'>
           <HomeIcon className={classes.iconStyle} />
@@ -70,21 +72,23 @@ const Sidebar = () => {
           Request
         </Button>
       </Link>
-      {admin === 'admin@gmail.com' ? (
+      <Link to='/notification'>
+        <Button className={classes.btnStyle} variant='contained'>
+          <NotificationsIcon className={classes.iconStyle} />
+          Notification
+        </Button>
+      </Link>
+      {/* only admin update */}
+      {admin === 'admin@gmail.com' && (
         <Link to='/update'>
           <Button className={classes.btnStyle} variant='contained'>
             <SystemUpdateAltIcon className={classes.iconStyle} />
             Update
           </Button>
         </Link>
-      ) : (
-        <Link to='/notification'>
-          <Button className={classes.btnStyle} variant='contained'>
-            <NotificationsIcon className={classes.iconStyle} />
-            Notification
-          </Button>
-        </Link>
       )}
+      {/* end admin update */}
+
       <br />
       <Button
         onClick={() => setSignedUser({})}

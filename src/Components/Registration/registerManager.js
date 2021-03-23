@@ -16,13 +16,14 @@ export const createUserWithEmailAndPassword = (name, email, password) => {
       const newUser = res.user;
       newUser.error = '';
       newUser.success = true;
-      // updateUserName(name);
+      alert('Successfully registered your name,email!');
       return newUser;
     })
     .catch((error) => {
       const newUser = {};
       newUser.error = error.message;
       newUser.success = false;
+      alert(error.message);
       return newUser;
     });
 };
@@ -56,17 +57,3 @@ export const resetPassword = (email) => {
       console.log(error);
     });
 };
-
-// const updateUserName = (name) => {
-//   const user = firebase.auth.currentUser;
-//   user
-//     .updateProfile({
-//       displayName: name,
-//     })
-//     .then(function () {
-//       console.log('user name updated successfully');
-//     })
-//     .catch(function (error) {
-//       console.log(error);
-//     });
-// };

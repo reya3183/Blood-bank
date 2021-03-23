@@ -43,7 +43,7 @@ const useStyles = makeStyles({
   },
   loginStyle: {
     textAlign: 'center',
-    padding: '15px 110px',
+    padding: '.8rem 8rem',
     borderRadius: '25px',
     border: 'none',
     backgroundColor: '#D32026',
@@ -102,8 +102,7 @@ const SignIn = () => {
         setUser(res);
         setSignedUser(res);
         // console.log(user);
-        history.push(`/home`);
-        // history.replace(from);
+        history.replace(from);
       });
     }
     e.target.reset();
@@ -113,13 +112,15 @@ const SignIn = () => {
   return (
     <Container style={{ textAlign: 'center' }}>
       <Grid container direction='row' justify='center' alignItems='center'>
-        <Grid item xs={12} sm={6} md={6}>
+        <Grid item xs={12} sm={12} md={6} lg={6}>
+          {/* logo */}
           <img src={logo} alt='logo' className={classes.image} />
           <h1 className={classes.logoStyle}>
             <span className={classes.red}>Blood </span> Donation
           </h1>
         </Grid>
-        <Grid style={{ color: '#6F6F6F' }} item xs={12} sm={6} md={6}>
+        <Grid style={{ color: '#6F6F6F' }} item xs={12} sm={12} md={6} lg={6}>
+          {/* signin form */}
           <h1 className={classes.headline}>Sign In</h1>
           <form onSubmit={handleSubmit}>
             <label className={classes.labelStyle}>
@@ -151,18 +152,22 @@ const SignIn = () => {
               value='Login'
             ></input>
           </form>
+          {/*end signin form */}
+
           <button
             className={classes.forgetBtn}
             onClick={() => resetPassword(user.email)}
           >
             Forget Password
           </button>
-          <p>
+          <p style={{ marginBottom: '20px' }}>
             Don't have an account?
             <Link to='/signup' className={classes.linkStyle}>
               SignUp
             </Link>
           </p>
+
+          <p style={{ color: '#D32026' }}>{user.error}</p>
         </Grid>
       </Grid>
     </Container>

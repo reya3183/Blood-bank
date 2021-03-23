@@ -43,7 +43,7 @@ const useStyles = makeStyles({
   },
   nextStyle: {
     textAlign: 'center',
-    padding: '15px 110px',
+    padding: '.975rem 8rem',
     borderRadius: '25px',
     border: 'none',
     backgroundColor: '#D32026',
@@ -84,7 +84,8 @@ const ExtraInfo = () => {
   return (
     <Container style={{ textAlign: 'center' }}>
       <Grid container direction='row' justify='center' alignItems='flex-start'>
-        <Grid item xs={12} sm={6} md={6}>
+        {/* logo and description */}
+        <Grid item xs={12} sm={12} md={6} lg={6}>
           <img src={logo} alt='logo' className={classes.image} />
           <h1>
             <span className={classes.red}>Blood</span> Donation
@@ -104,7 +105,8 @@ const ExtraInfo = () => {
             Minimum age for donation: <span className={classes.red}>18yrs</span>
           </p>
         </Grid>
-        <Grid style={{ color: '#6F6F6F' }} item xs={12} sm={6} md={6}>
+        {/* info form */}
+        <Grid style={{ color: '#6F6F6F' }} item xs={12} sm={12} md={6} lg={6}>
           <h2 className={classes.headline}>Additional Information</h2>
           <form onSubmit={handleSubmit}>
             <label className={classes.labelStyle}>
@@ -150,6 +152,7 @@ const ExtraInfo = () => {
             ></input>
           </form>
         </Grid>
+        {/*end info form */}
       </Grid>
     </Container>
   );

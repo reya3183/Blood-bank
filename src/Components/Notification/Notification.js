@@ -51,9 +51,13 @@ const Notification = () => {
     <div style={{ backgroundColor: '#F6F7F9' }}>
       <Container>
         <Grid container spacing={2}>
+          {/* sidebar */}
           <Grid
             item
-            xs={3}
+            xs={12}
+            md={3}
+            sm={12}
+            lg={3}
             style={{
               backgroundColor: 'white',
               textAlign: 'center',
@@ -62,14 +66,19 @@ const Notification = () => {
           >
             <Sidebar></Sidebar>
           </Grid>
+          {/* end sidebar */}
           <Grid
             style={{
               marginTop: '3rem',
               padding: '3rem',
             }}
             item
-            xs={9}
+            xs={12}
+            sm={12}
+            md={9}
+            lg={9}
           >
+            {/* Nearby requests */}
             <h3 className={classes.headline}>Your Nearby Area's Requests</h3>
             {newCollection.length !== 0 ? (
               <div style={{ display: 'flex', flexFlow: 'row wrap' }}>
