@@ -1,7 +1,5 @@
 # Blood Donation
 
-image
-
 ## Technologies
 
 - React 17.0.1
